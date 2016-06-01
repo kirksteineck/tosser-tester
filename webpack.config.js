@@ -3,5 +3,8 @@ module.exports = {
    output: {
        path: './bin',
        filename: 'app.bundle.js'
-   }
+   },
+  resolve: {
+    modulesDirectories: ['node_modules']
+  }
 };
