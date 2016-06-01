@@ -2,14 +2,11 @@ var Tosser = require('tosser');
 $(function () {
   var tosser = new Tosser();
 
-  setTimeout(function () {
-    console.log('Taking app action')
-    tosser.sendToChildren('appAction', {id: 'this is a custom object', key: 'value'}, function (ackd) {
-      console.log('Ack response, appAction', ackd)
-    });
-  }, 1000)
+  tosser.on('colorChange', function (data) {
+  	$('#color').html(data.color).css({'background-color': data.color});
+    tosser.sendToChildren('colorChange', data, function (ackd) {
+    	console.log('Sent to children:', ackd)
+    })
+  });
 
-  tosser.on('adAction', function (data) {
-    console.log('Ad took action!', data)
-  })
 })

@@ -44,24 +44,26 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Tosser = __webpack_require__(1);
-	var tosser = new Tosser();
+	var Tosser = __webpack_require__(2);
+	$(function () {
+	  var tosser = new Tosser();
 
-	setTimeout(function () {
-	  console.log('Take appAction')
-	  tosser.broadcast('appAction', {id: 'this is a custom object', key: 'value'}, function (ackd) {
-	    console.log('Ack response, appAction', ackd)
-	  });
-	}, 1000)
+	  setTimeout(function () {
+	    console.log('Taking app action')
+	    tosser.sendToChildren('appAction', {id: 'this is a custom object', key: 'value'}, function (ackd) {
+	      console.log('Ack response, appAction', ackd)
+	    });
+	  }, 1000)
 
-	console.log('Listen to adAction')
-	tosser.on('adAction', function (data) {
-	  console.log('Ad took action!', data)
+	  tosser.on('adAction', function (data) {
+	    console.log('Ad took action!', data)
+	  })
 	})
 
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -138,7 +140,6 @@
 	            delete _this.onceRegisteredMessages[data.type];
 	          }
 
-	          console.log(_this.registeredMessages);
 	          if (_this.registeredMessages[data.type]) {
 	            _this.registeredMessages[data.type].forEach(function (callback) {
 	              callback(data.body, receivedFrom.element);
@@ -154,7 +155,7 @@
 	      // Make sure the message that we send out is a string and not an object.
 	      // IE does not like sending objects across
 	      body = JSON.stringify(body);
-	      if (targetWindow && targetWindow.window) {
+	      if (targetWindow.window) {
 	        targetWindow.window.postMessage(body, '*');
 	      } else {
 	        var frames = this._getAllFramesEverywhere();
@@ -171,10 +172,10 @@
 	    value: function _getAllFramesEverywhere() {
 	      var _getWindowsFrames = function _getWindowsFrames(window) {
 	        var rtn = [];
-	        for (var frame in window.frames) {
+	        window.frames.forEach(function (frame) {
 	          rtn.push(frame);
 	          rtn = rtn.concat(_getWindowsFrames(frame));
-	        }
+	        });
 	        return rtn;
 	      };
 
@@ -189,8 +190,7 @@
 
 	      clearTimeout(this.messageSendTimeout);
 	      this.messageSendTimeout = setTimeout(function () {
-	        Object.keys(_this2.pendingMessages).forEach(function (index) {
-	          var pendingMessage = _this2.pendingMessages[index];
+	        _this2.pendingMessages.forEach(function (pendingMessage, index) {
 	          pendingMessage.message.attempt++;
 	          if (pendingMessage.message.attempt > 20) {
 	            delete _this2.pendingMessages[index];
