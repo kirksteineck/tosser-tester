@@ -3,7 +3,7 @@
 
 ## Run
 ```
-$ git clone 
+$ git clone https://github.com/kirksteineck/tosser-tester.git
 ```
 then
 ```
@@ -13,4 +13,5 @@ then
 ```
 $ npm start
 ```
-This will run the app on http://localhost:8080 using a webpack-dev-server
+This will run the app on [This link](http://localhost:8080) using a webpack-dev-server
+
