@@ -4,7 +4,8 @@
   "description": "description",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/webpack-dev-server -d"
   },
   "author": "Kirk",
   "license": "ISC",
@@ -14,6 +15,6 @@
   },
   "dependencies": {
     "jquery": "^2.2.4",
-    "tosser": "0.0.7"
+    "tosser": "~0.0.7"
   }
 }

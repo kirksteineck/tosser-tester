@@ -48,15 +48,15 @@
 	var tosser = new Tosser();
 
 	setTimeout(function () {
-	  console.log('Take appAction')
-	  tosser.broadcast('appAction', {id: 'this is a custom object', key: 'value'}, function (ackd) {
-	    console.log('Ack response, appAction', ackd)
+	  console.log('Take adAction')
+	  tosser.broadcast('adAction', {key: 'Whoa ad action baby'}, function (ackd) {
+	    console.log('Ack response, adAction', ackd)
 	  });
 	}, 1000)
 
-	console.log('Listen to adAction')
-	tosser.on('adAction', function (data) {
-	  console.log('Ad took action!', data)
+	console.log('Listen to app action')
+	tosser.on('appAction', function (data) {
+	  console.log('App took action!', data)
 	})
 
 
