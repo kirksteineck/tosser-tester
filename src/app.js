@@ -1,3 +1,4 @@
+require('jquery');
 var Tosser = require('tosser');
 $(function () {
   var tosser = new Tosser();
@@ -11,19 +12,15 @@ $(function () {
     return color;
   }
 
-  tosser.on('colorChange', function (data) {
-  	$('#color').html(data.color).css({'background-color': data.color});
-    tosser.sendToChildren('colorChange', data, function (ackd) {
-    	console.log('Sent to children:', ackd)
-    })
-  });
-
   $('button').click(function () {
-  	var newColor = getRandomColor();
-    $('#color').html(newColor).css({'background-color': newColor});
-    tosser.sendToChildren('colorChange', { color: newColor }, function (ackd) {
-      console.log('Broadcast:', ackd)
+    tosser.broadcast('colorChange', { color: getRandomColor() }, function (ackd) {
+      console.log('Brodcast from parent:', ackd);
     });
   });
 
+  tosser.on('colorChange', function (data) {
+    $('#color').html(data.color).css({'background-color': data.color});
+  });
+
 })
+
