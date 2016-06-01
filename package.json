@@ -1,0 +1,18 @@
+{
+  "name": "iframe-test",
+  "version": "1.0.0",
+  "description": "description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kirk",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "tosser": "0.0.7"
+  }
+}
