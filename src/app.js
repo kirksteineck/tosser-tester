@@ -1,1 +1,2 @@
-require('./toss.js')
+require('tosser');
+require('./toss.js');

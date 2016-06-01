@@ -44,7 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(2)
+	__webpack_require__(1);
+	__webpack_require__(2);
 
 /***/ },
 /* 1 */
@@ -359,15 +360,11 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	__webpack_require__(1);
-
-	$(document).ready(function(){
-		Tosser  
+	tosser.broadcast('userAction', {id: 'this is a custom object', key: 'value'}, function (ackd) {
+	  console.log('Ack response', ackd)
 	});
-
-
 
 /***/ }
 /******/ ]);
